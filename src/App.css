@@ -1,0 +1,453 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #fafafa 0%, #e0e0e0 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Main app container */
+.app {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Headings */
+.app h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #262626;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Authentication container */
+.auth-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #dbdbdb;
+}
+
+/* Auth tabs */
+.auth-tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 15px;
+  background: none;
+  border: none;
+  color: #8e8e8e;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.auth-tabs button.active {
+  color: #0095f6;
+  border-bottom-color: #0095f6;
+}
+
+.auth-tabs button:hover {
+  color: #0095f6;
+}
+
+/* Auth forms */
+.auth-form {
+  width: 100%;
+}
+
+.auth-form h2 {
+  color: #262626;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Input fields */
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  color: #262626;
+
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #a8a8a8;
+  background: white;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #8e8e8e;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+button[type="submit"] {
+  background: #0095f6;
+  color: white;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background: #0085e0;
+}
+
+button[type="submit"]:disabled {
+  background: #b2dffc;
+  cursor: not-allowed;
+}
+
+.logout-btn {
+  background: #efefef;
+  color: #262626;
+  padding: 10px 20px;
+  width: auto;
+  margin-top: 10px;
+}
+
+.logout-btn:hover {
+  background: #dbdbdb;
+}
+
+/* Auth switch text */
+.auth-switch {
+  margin-top: 20px;
+  color: #8e8e8e;
+  font-size: 14px;
+}
+
+.auth-switch span {
+  color: #0095f6;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-switch span:hover {
+  text-decoration: underline;
+}
+
+/* Demo accounts */
+.demo-accounts {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.demo-accounts h3 {
+  color: #495057;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.demo-accounts p {
+  color: #6c757d;
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+/* User section */
+.user-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+  border: 1px solid #dbdbdb;
+}
+
+.user-section p {
+  color: #262626;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* Create post section */
+.create-post {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+  border: 1px solid #dbdbdb;
+}
+
+.create-post h2 {
+  color: #262626;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.create-post form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* File input */
+input[type="file"] {
+  padding: 12px;
+  border: 2px dashed #dbdbdb;
+  background: #fafafa;
+  cursor: pointer;
+  text-align: center;
+}
+
+input[type="file"]:hover {
+  border-color: #0095f6;
+  background: #f0f8ff;
+}
+
+/* Image preview */
+.image-preview {
+  margin: 10px 0;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 2px solid #dbdbdb;
+}
+
+/* Textarea */
+textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Posts feed */
+.posts-feed {
+  width: 100%;
+}
+
+.posts-feed h2 {
+  color: #262626;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Individual post */
+.post {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid #dbdbdb;
+}
+
+.post-header {
+  padding: 15px;
+  font-weight: 600;
+  color: #262626;
+  border-bottom: 1px solid #efefef;
+  background: #fafafa;
+  text-align: left;
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-actions {
+  padding: 15px;
+  border-bottom: 1px solid #efefef;
+}
+
+.post-actions button {
+  background: none;
+  color: #262626;
+  padding: 8px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-actions button:hover {
+  background: #f8f9fa;
+}
+
+.post-caption {
+  padding: 15px;
+  color: #262626;
+  line-height: 1.4;
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+}
+
+.post-caption strong {
+  color: #262626;
+}
+
+.post-comments {
+  padding: 15px;
+  background: #fafafa;
+}
+
+.post-comments h4 {
+  color: #262626;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.post-comments p {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  color: #262626;
+  text-align: left;
+  border: 1px solid #efefef;
+}
+
+/* Add comment section */
+.add-comment {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.add-comment input {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+.add-comment button {
+  width: auto;
+  min-width: 80px;
+  margin: 0;
+  padding: 10px 15px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+  
+  .app h1 {
+    font-size: 2rem;
+  }
+  
+  .auth-container {
+    padding: 30px 20px;
+  }
+  
+  .user-section,
+  .create-post {
+    padding: 20px;
+  }
+  
+  input, textarea, button {
+    padding: 12px;
+  }
+  
+  .image-preview img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Error states */
+.error {
+  border-color: #ed4956 !important;
+}
+
+.error-message {
+  color: #ed4956;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+}
