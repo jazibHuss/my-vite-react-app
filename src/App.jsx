@@ -1,21 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login';
+import Login from './pages/login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 
 function App() {
-  // State for authentication (Lifted up to the main App)
   const [currentUser, setCurrentUser] = useState(null);
-  
-  // State for user storage (simulating a database)
-  const [users, setUsers] = useState([
-    { username: 'demo', password: 'demo123' },
-    { username: 'test', password: 'test123' }
-  ]);
-
-  // State to manage all posts
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -30,49 +21,62 @@ function App() {
       newComment: ''
     }
   ]);
-
-  // Refs for file inputs
   const fileInputRef = useRef(null);
 
-  // Authentication Functions (These are passed down as props)
-  const handleLogin = (user) => {
-    setCurrentUser(user);
+  // Load currentUser from localStorage on first render
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) {
+      setCurrentUser(storedUser.username);
+    }
+  }, []);
+
+  const handleLogin = (username) => {
+    setCurrentUser(username);
+    localStorage.setItem("currentUser", JSON.stringify({ username }));
   };
 
   const handleSignup = (newUser) => {
-    setUsers(prevUsers => [...prevUsers, newUser]);
+    // Save new user in localStorage
+    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    storedUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(storedUsers));
+
+    // Log them in
     setCurrentUser(newUser.username);
+    localStorage.setItem("currentUser", JSON.stringify({ username: newUser.username }));
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
+    localStorage.removeItem("currentUser");
   };
 
   return (
     <Router>
       <div className="app">
-        {/* Routes decide which component to show based on the URL */}
         <Routes>
-          {/* If user is logged in, redirect from login/signup to home. Otherwise, show the page. */}
           <Route 
             path="/login" 
-            element={currentUser ? <Navigate to="/" /> : <Login users={users} onLogin={handleLogin} />} 
+            element={currentUser ? <Navigate to="/" /> : <Login onLogin={handleLogin} />} 
           />
           <Route 
             path="/signup" 
-            element={currentUser ? <Navigate to="/" /> : <Signup users={users} onSignup={handleSignup} />} 
+            element={currentUser ? <Navigate to="/" /> : <Signup onSignup={handleSignup} />} 
           />
-          {/* Protect the Home route: if not logged in, redirect to login. */}
           <Route 
             path="/" 
-            element={currentUser ? <Home 
-                                      currentUser={currentUser} 
-                                      onLogout={handleLogout}
-                                      posts={posts}
-                                      setPosts={setPosts}
-                                      fileInputRef={fileInputRef}
-                                    /> 
-                                  : <Navigate to="/login" />} 
+            element={currentUser ? (
+              <Home
+                currentUser={currentUser}
+                onLogout={handleLogout}
+                posts={posts}
+                setPosts={setPosts}
+                fileInputRef={fileInputRef}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )} 
           />
         </Routes>
       </div>

@@ -1,21 +1,32 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = ({ users, onLogin }) => {
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: ''
-  });
+const Login = ({ onLogin }) => {
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = users.find(u => u.username === loginData.username && u.password === loginData.password);
-    
+
+    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const user = storedUsers.find(
+      (u) => u.username === loginData.username && u.password === loginData.password
+    );
+
     if (user) {
-      onLogin(loginData.username); // Call the function passed from App.js
+      // Save current user to localStorage
+      localStorage.setItem("currentUser", JSON.stringify({ username: user.username }));
+
+      // Call parent handler (App.jsx) to update state
+      onLogin(user.username);
+
+      // Clear form
       setLoginData({ username: '', password: '' });
+
+      // Redirect to home
+      navigate("/");
     } else {
-      alert('Invalid username or password!');
+      alert("Invalid username or password!");
     }
   };
 
@@ -42,15 +53,9 @@ const Login = ({ users, onLogin }) => {
           <button type="submit">Login</button>
         </form>
         <p className="auth-switch">
-          Don't have an account?{' '}
-          <Link to="/signup">Sign up here</Link> {/* Use Link for navigation */}
+          Don't have an account?{" "}
+          <Link to="/signup">Sign up here</Link>
         </p>
-      </div>
-
-      <div className="demo-accounts">
-        <h3>Demo Accounts:</h3>
-        <p>Username: demo | Password: demo123</p>
-        <p>Username: test | Password: test123</p>
       </div>
     </div>
   );

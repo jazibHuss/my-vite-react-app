@@ -66,10 +66,20 @@ const Home = ({ currentUser, onLogout, posts, setPosts, fileInputRef }) => {
   // Function to handle adding a comment
   const handleAddComment = (postId) => {
     setPosts(posts.map(post => {
-      if (post.id === postId && post.newComment.trim()) {
-        const newCommentObj = { id: post.comments.length + 1, text: post.newComment };
-        return { ...post, comments: [...post.comments, newCommentObj], newComment: '' };
-      }
+    if (post.id === postId && post.newComment.trim()) {
+  const newCommentObj = { 
+    id: post.comments.length + 1, 
+    username: currentUser, 
+    text: post.newComment 
+  };
+  return { 
+    ...post, 
+    comments: [...post.comments, newCommentObj], 
+    newComment: '' 
+  };
+}
+
+    
       return post;
     }));
   };
@@ -132,8 +142,11 @@ const Home = ({ currentUser, onLogout, posts, setPosts, fileInputRef }) => {
               <div className="post-comments">
                 <h4>Comments ({post.comments.length}):</h4>
                 {post.comments.map(comment => (
-                  <p key={comment.id}>{comment.text}</p>
-                ))}
+                <p key={comment.id}>
+                 <strong>{comment.username}:</strong> {comment.text}
+  </p>
+))}
+
                 <div className="add-comment">
                   <input
                     type="text"
